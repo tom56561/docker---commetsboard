@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: rookie-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: "rd3"
+      MYSQL_PASSWORD: "asd123"
+      MYSQL_ROOT_PASSWORD: "asd123"
+    volumes:
+      - /var/log/docker/data/mysql:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: rookie-phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: rookie-mysql
+  redis:
+    image: redis:3.0.0
+    container_name: rookie-redis
+    stdin_open: true
+    tty: true
+    ports:
+      - 6379:6379
+    volumes:
+      - /Users/ricky_chou/Documents/workspace/bb2/redis.conf:/usr/local/etc/redis/redis.conf
+    command: [ "sh", "-c", "redis-server", "/usr/local/etc/redis/redis.conf" ]    # 容器啟動後執行的命令

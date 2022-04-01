@@ -1,0 +1,14 @@
+#   基本映像檔，必須是第一個指令
+FROM alpine:3.13
+
+#   更新映像檔的指令
+RUN apk add nginx curl
+
+COPY example1_nginx.conf /etc/nginx/nginx.conf
+COPY index.html  /var/www/html/index.html
+
+#   建立容器時要執行的指令
+ENTRYPOINT [ "sh", "-c", "nginx;" ]
+
+# docker build -t example1:1.0.1 -f example1Docker .
+# docker run -d -p 10071:80 --name example1 example1:1.0.1
