@@ -26,5 +26,5 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - /Users/ricky_chou/Documents/workspace/bb2/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/rookie/redis.conf:/usr/local/etc/redis/redis.conf
     command: [ "sh", "-c", "redis-server", "/usr/local/etc/redis/redis.conf" ]    # 容器啟動後執行的命令
