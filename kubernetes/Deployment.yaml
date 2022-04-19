@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-pod-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+        app: my-pod
+  minReadySeconds: 20 #容器內應用程式的啟動時間，Kubernetes 會等待設定的時間後才繼續進行升級流程
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 5 #升級過程中最多可以比原先設定所多出的 pod 數量
+      maxUnavailable: 0 #最多可以有幾個 pod 處在無法服務的狀態
+  template:
+    metadata:
+      labels:
+        app: my-pod
+    spec:
+      containers:
+      - name: k8s-deploy
+        image: k8s-deploy:1.0.1
+        command: 
+          - /bin/sh
+          - -c
+          - |
+            php-fpm7 -R
+            nginx
+        volumeMounts:
+        - name: training-volume
+          mountPath: /var/log/nginx
+        - name: k8s-nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: training-volume
+        hostPath:
+          path: /var/log/rookie/nginx
+      - name: k8s-nginx-config
+        configMap:
+          name: k8s-nginx
+
+#  kubectl create configmap k8s-nginx --from-file=nginx.conf=../nginx/nginx_deploy.conf

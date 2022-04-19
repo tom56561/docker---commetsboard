@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod-volumn
+  labels:
+    app: my-pod
+spec:
+  containers:
+  - name: ping-client
+    image: rickychou621/rookie:1.0.2
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        php-fpm7 -R
+        nginx
+    volumeMounts:
+      - name: training-volume
+        mountPath: /var/log/nginx
+      - name: rookie-nginx-config
+        mountPath: /etc/nginx/nginx.conf
+        subPath: nginx.conf
+  volumes:
+  - name: training-volume
+    hostPath:
+      path: /var/log/rookie/nginx
+  - name: rookie-nginx-config
+    configMap:
+      name: rookie-nginx
+
+    # kubectl create configmap rookie-nginx --from-file=nginx.conf=../example/example1_nginx.conf
+    # kubectl port-forward my-pod-volumn 3000:80

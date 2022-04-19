@@ -1,0 +1,7 @@
+#   基本映像檔，必須是第一個指令
+FROM rookie:1.0.1
+
+#   更新映像檔的指令
+COPY index2.php  /var/www/html/index.php
+
+# docker build -t k8s-deploy:1.0.2 -f example4Docker .

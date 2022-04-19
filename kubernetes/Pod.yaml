@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-first-pod
+spec:
+  containers:
+  - name: ping-client
+    image: rickychou621/rookie:1.0.1
+    command: ["ping"]
+    args: ["8.8.8.8"]
