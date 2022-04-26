@@ -1,0 +1,34 @@
+version: '3.6'
+services:
+  finaltest:
+    build:
+      context: .
+      dockerfile: basicDocker 
+    image: finaltest:1.0.1
+    container_name: finaltest
+    ports:
+      - 10081:80
+    volumes:
+      - /Users/ricky_chou/Documents/workspace/rookie_training/casino_member:/home/gbt/casino_member
+      - /Users/ricky_chou/Documents/workspace/rookie_training/general:/home/gbt/general
+      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/finaltest/config_env.php:/home/gbt/casino_member/config/config_env.php
+      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/finaltest/config_inc.php:/home/gbt/casino_member/config/config_inc.php
+      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/finaltest/nginx.conf:/etc/nginx/nginx.conf
+      - /Users/ricky_chou/Documents/workspace/rookie_training/log:/var/log
+      - /Users/ricky_chou/Documents/workspace/rookie_training/txt:/home/gbt/txt
+    command: [ "sh", "-c", "mkdir /var/log/php7;php-fpm7 -R;nginx;" ]    # 容器啟動後執行的命令
+    networks:
+      - final-test
+  finaltest-rookie:
+    image: rookie:1.0.1
+    container_name: finaltest-rookie
+    ports:
+      - 10082:80
+    volumes:
+      - /Users/ricky_chou/Documents/workspace/rookie_training/rookie_training:/var/www/html/rookie
+      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    command: [ "sh", "-c", "php-fpm7 -R;nginx;" ]    # 容器啟動後執行的命令
+    networks:
+      - final-test  
+networks:
+    final-test:
