@@ -1,0 +1,43 @@
+version: '3.6'
+services:
+  example1:
+    build:
+      context: .
+      dockerfile: example1Docker
+    image: example3:1.0.1
+    container_name: example1_compose
+    stdin_open: true
+    tty: true
+    ports:
+      - "10061:80"
+  example2:
+    build:
+      context: .
+      dockerfile: example1Docker
+    image: example4:1.0.1
+    container_name: example2_compose
+    stdin_open: true
+    tty: true
+    ports:
+      - "10062:80"
+    volumes:
+      - /Users/po_lee/Desktop/workspace/docker/example/index2.html:/var/www/html/index.html
+    networks:
+      - net_lee
+  example3:
+    build:
+      context: .
+      dockerfile: example1Docker
+    image: example4:1.0.1
+    container_name: example3_compose
+    stdin_open: true
+    tty: true
+    ports:
+      - "10063:80"
+    volumes:
+      - /Users/po_lee/Desktop/workspace/docker/example/index2.html:/var/www/html/index.html
+    networks:
+      - net_lee
+networks:
+  net_po:
+  net_lee:
