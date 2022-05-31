@@ -9,14 +9,15 @@ services:
     ports:
       - 10081:80
     volumes:
-      - /Users/ricky_chou/Documents/workspace/rookie_training/casino_member:/home/gbt/casino_member
-      - /Users/ricky_chou/Documents/workspace/rookie_training/general:/home/gbt/general
-      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/finaltest/config_env.php:/home/gbt/casino_member/config/config_env.php
-      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/finaltest/config_inc.php:/home/gbt/casino_member/config/config_inc.php
-      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/finaltest/nginx.conf:/etc/nginx/nginx.conf
-      - /Users/ricky_chou/Documents/workspace/rookie_training/log:/var/log
-      - /Users/ricky_chou/Documents/workspace/rookie_training/txt:/home/gbt/txt
-    command: [ "sh", "-c", "mkdir /var/log/php7;php-fpm7 -R;nginx;" ]    # 容器啟動後執行的命令
+      - /Users/po_lee/Desktop/workspace/casino_member:/home/gbt/casino_member
+      - /Users/po_lee/Desktop/workspace/casino/general:/home/gbt/general
+      - /Users/po_lee/Desktop/workspace/docker/finaltest/config_env.php
+      - /Users/po_lee/Desktop/workspace/docker/finaltest/config_env.php:/home/gbt/casino_member/config/config_env.php
+      - /Users/po_lee/Desktop/workspace/docker/finaltest/config_inc.php:/home/gbt/casino_member/config/config_inc.php
+      - /Users/po_lee/Desktop/workspace/docker/finaltest/nginx.conf:/etc/nginx/nginx.conf
+      # - /Users/po_lee/Desktop/workspace/rookie_training/log:/var/log
+      # - /Users/po_lee/Desktop/workspace/rookie_training/txt:/home/gbt/txt
+    command: [ "sh", "-c", "php-fpm7 -R;nginx;" ]    # 容器啟動後執行的命令
     networks:
       - final-test
   finaltest-casino:
@@ -28,11 +29,11 @@ services:
       - "10082:80"
     container_name: finaltest-casino
     volumes:
-      - /Users/ricky_chou/Documents/workspace/rookie_training/casino:/home/gbt/casino/
-      - /Users/ricky_chou/Documents/workspace/rookie_training/general:/home/gbt/general/
-      - /Users/ricky_chou/Documents/workspace/rookie_training/config/dev/casino/DockerCompose/DockerConfig:/home/gbt/casino/config/
-      - /Users/ricky_chou/Documents/workspace/rookie_training/game:/home/gbt/game/
-      - /Users/ricky_chou/Documents/workspace/rookie_training/config/dev/casino/DockerCompose/casinonginx.conf:/etc/nginx/nginx.conf
+      - /Users/po_lee/Desktop/workspace/casino/casino:/home/gbt/casino/
+      - /Users/po_lee/Desktop/workspace/casino/general:/home/gbt/general/
+      - /Users/po_lee/Desktop/workspace/casino/config/dev/casino/DockerCompose/DockerConfig:/home/gbt/casino/config/
+      - /Users/po_lee/Desktop/workspace/casino/game:/home/gbt/game/
+      - /Users/po_lee/Desktop/workspace/casino/config/dev/casino/DockerCompose/casinonginx.conf:/etc/nginx/nginx.conf
     command: [ "sh", "-c", "php-fpm7 -R; nginx;" ]
 networks:
     final-test:
