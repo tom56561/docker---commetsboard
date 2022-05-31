@@ -64,7 +64,7 @@ $DBInfo = array();
 $DBInfo[ 'Main' ] = array( 'HOST_M' => $DBIP, 'HOST_S' => $DBIP, 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'MainDB', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);
 $DBInfo[ 'Core' ] = array( 'HOST_M' => $DBIP, 'HOST_S' => $DBIP, 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'CoreDB', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);
 $DBInfo[ 'Game5' ] = array( 'HOST_M' => $DBIP, 'HOST_S' => $DBIP, 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'GameDB5', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);
-$DBInfo[ 'Wagers5_All' ]  = array( 'HOST_M' => '10.31.67.213', 'HOST_S' => '10.31.67.213', 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'WagersDB5_All', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);
+$DBInfo[ 'Wagers5_All' ]  = array( 'HOST_M' => '192.168.141.62', 'HOST_S' => '192.168.141.62', 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'WagersDB5_All', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);
 $DBInfo[ 'Wagers5' ] = array( 'HOST_M' => $DBIP, 'HOST_S' => $DBIP, 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'WagersDB5', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);
 $DBInfo[ 'Wagers5Ex' ] = array( 'HOST_M' => $DBIP, 'HOST_S' => $DBIP, 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'WagersDB5Ex', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);
 $DBInfo[ 'Wagers30' ] = array( 'HOST_M' => $DBIP, 'HOST_S' => $DBIP, 'USER' => $CDBU, 'PWD' => $CDBP, 'NAME' => 'WagersDB30', 'CHARSET' => 'utf8', 'CLOSE_FLAG' => false);

@@ -19,16 +19,20 @@ services:
     command: [ "sh", "-c", "mkdir /var/log/php7;php-fpm7 -R;nginx;" ]    # 容器啟動後執行的命令
     networks:
       - final-test
-  finaltest-rookie:
-    image: rookie:1.0.1
-    container_name: finaltest-rookie
+  finaltest-casino:
+    build:
+      context: .
+      dockerfile: CasinoDockerfile
+    image: casinobase 
     ports:
-      - 10082:80
+      - "10082:80"
+    container_name: finaltest-casino
     volumes:
-      - /Users/ricky_chou/Documents/workspace/rookie_training/rookie_training:/var/www/html/rookie
-      - /Users/ricky_chou/Documents/workspace/rookie_training/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-    command: [ "sh", "-c", "php-fpm7 -R;nginx;" ]    # 容器啟動後執行的命令
-    networks:
-      - final-test  
+      - /Users/ricky_chou/Documents/workspace/rookie_training/casino:/home/gbt/casino/
+      - /Users/ricky_chou/Documents/workspace/rookie_training/general:/home/gbt/general/
+      - /Users/ricky_chou/Documents/workspace/rookie_training/config/dev/casino/DockerCompose/DockerConfig:/home/gbt/casino/config/
+      - /Users/ricky_chou/Documents/workspace/rookie_training/game:/home/gbt/game/
+      - /Users/ricky_chou/Documents/workspace/rookie_training/config/dev/casino/DockerCompose/casinonginx.conf:/etc/nginx/nginx.conf
+    command: [ "sh", "-c", "php-fpm7 -R; nginx;" ]
 networks:
     final-test:

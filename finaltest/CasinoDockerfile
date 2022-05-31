@@ -1,0 +1,37 @@
+FROM alpine:3.8
+
+RUN apk add --update php7 php7-gd php7-gmp php7-iconv php7-json php7-mbstring php7-mcrypt php7-mysqli php7-mysqlnd php7-openssl php7-pcntl php7-pdo php7-pdo_mysql php7-pdo_sqlite php7-posix php7-sockets php7-sqlite3 php7-sysvsem php7-sysvshm php7-xml php7-xmlreader php7-zip php7-zlib php7-fpm php7-opcache zlib zlib-dev php7-xmlwriter php7-fileinfo php7-simplexml php7-redis php7-curl php7-tokenizer php7-ctype
+
+RUN apk add nginx curl
+
+RUN apk add php7-xdebug
+#RUN ln -s /usr/bin/php7 /usr/bin/php
+
+
+# set timezone
+RUN apk add tzdata
+RUN cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+RUN echo "Asia/Taipei" > /etc/timezone
+RUN apk del tzdata
+
+RUN sed -i "s/;date.timezone =/date.timezone = 'Asia\/Taipei'/g" /etc/php7/php.ini && \
+#    sed -i 's/pm = dynamic/pm = static/g' /etc/php7/php-fpm.d/www.conf && \
+#    sed -i 's/pm.max_children = 5/pm.max_children = 20/g' /etc/php7/php-fpm.d/www.conf && \
+#    sed -i 's/;pm.max_requests = 500/pm.max_requests = 500/g' /etc/php7/php-fpm.d/www.conf && \
+    sed -i "s/track_errors = Off/track_errors = On/g" /etc/php7/php.ini && \
+    sed -i "s/display_startup_errors = Off/display_startup_errors = On/g" /etc/php7/php.ini && \
+    sed -i "s/display_errors = Off/display_errors = On/g" /etc/php7/php.ini && \
+    sed -i "s/error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/g" /etc/php7/php.ini && \
+    sed -i 's/user = nobody/user = root/g' /etc/php7/php-fpm.d/www.conf && \
+    sed -i 's/group = nobody/group = root/g' /etc/php7/php-fpm.d/www.conf && \
+    sed -i 's/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g' /etc/php7/php-fpm.d/www.conf && \
+    sed -i 's/;pid = run\/php-fpm7.pid/pid = \/run\/php-fpm7.pid/g' /etc/php7/php-fpm.d/www.conf && \
+    sed -i 's/;listen.mode = 0660/listen.mode = 0666/g' /etc/php7/php-fpm.d/www.conf
+
+RUN mkdir /home/gbt
+RUN mkdir /var/run/nginx
+
+
+RUN rm -rf /var/cache/apk/*
+
+#docker build -t casinobase -f DockerFile .
